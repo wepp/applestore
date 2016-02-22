@@ -17,11 +17,21 @@ public class ProductService implements IProductService {
     @Autowired
     private IProductDao productDao;
 
-    public void addProduct(Product product) {
-        productDao.addProduct(product);
+    public void addOneProduct(Product product) {
+        product.setCount(product.getCount()+1);
+        productDao.update(product);
     }
 
     public Product getProductById(int id) {
         return productDao.getProductById(id);
+    }
+
+    public void removeOneProduct(Product product) {
+        product.setCount(product.getCount()-1);
+        productDao.update(product);
+    }
+
+    public void addNewProduct(Product product) {
+        productDao.save(product);
     }
 }

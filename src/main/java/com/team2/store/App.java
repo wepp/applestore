@@ -9,24 +9,25 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-/**
- * Hello world!
- *
- */
-public class App 
+public class App
 {
     public static void main( String[] args ) {
 
-        ApplicationContext context = new ClassPathXmlApplicationContext("config.xml");
-        IProductService productService = (IProductService) context.getBean("productService");
-        IUserService userService = (IUserService) context.getBean("userService");
-        User user = new User();
-        user.setLogin("newUser");
-        user.setPassword("newPassword");
-        user.setRole(RoleEnum.SELLER.getValue());
-        userService.addUser(user);
-        Product pr = productService.getProductById(1);
-        System.out.println(pr);
-        productService.addProduct(pr);
+        IProductService productService = (IProductService) Constants.context.getBean("productService");
+//        IUserService userService = (IUserService) context.getBean("userService");
+//        User user = new User();
+//        user.setLogin("newUser");
+//        user.setPassword("newPassword");
+//        user.setRole(RoleEnum.SELLER.getValue());
+//        userService.addUser(user);
+//        Product pr = productService.getProductById(1);
+//        System.out.println(pr);
+//        productService.addOneProduct(pr);
+
+        Product pr1 = new Product();
+        pr1.setProductName("added");
+        pr1.setCount(100);
+        productService.addNewProduct(pr1);
+
     }
 }

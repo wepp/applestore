@@ -25,8 +25,8 @@ public class Sale {
     @JoinColumn(name = "user_id")
     private User user;
 
-    @Column(name="date")
-    private Date date;
+    @Column(name="time")
+    private long time;
 
     public int getSale_id() {
         return sale_id;
@@ -60,11 +60,11 @@ public class Sale {
         this.user = user;
     }
 
-    public Date getDate() {
-        return date;
+    public long getDate() {
+        return time;
     }
 
-    public void setDate(Date date) {
-        this.date = date;
+    public void setTime(long time) {
+        this.time = time;
     }
 }

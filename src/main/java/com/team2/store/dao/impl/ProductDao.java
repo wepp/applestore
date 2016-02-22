@@ -21,9 +21,12 @@ public class ProductDao implements IProductDao {
         return sessionFactory.getCurrentSession();
     }
 
-    public void addProduct(Product product) {
-        product.setCount(product.getCount()+1);
+    public void update(Product product) {
         currentSession().update(product);
+    }
+
+    public void save(Product product) {
+        currentSession().save(product);
     }
 
     public Product getProductById(int id) {

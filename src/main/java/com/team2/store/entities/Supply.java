@@ -24,8 +24,8 @@ public class Supply {
     @JoinColumn(name = "product_id")
     private Product product;
 
-    @Column(name="date")
-    private Date date;
+    @Column(name="time")
+    private long time;
 
     @Column(name="count")
     private int count;
@@ -54,12 +54,12 @@ public class Supply {
         this.product = product;
     }
 
-    public Date getDate() {
-        return date;
+    public long getTime() {
+        return time;
     }
 
-    public void setDate(Date date) {
-        this.date = date;
+    public void setTime(long time) {
+        this.time = time;
     }
 
     public int getCount() {
