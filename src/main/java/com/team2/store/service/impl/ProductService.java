@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 /**
  * Created by Isaiev on 22.02.2016.
  */
@@ -33,5 +35,14 @@ public class ProductService implements IProductService {
 
     public void addNewProduct(Product product) {
         productDao.save(product);
+    }
+
+    public List<Product> getAll(){
+        try {
+            return productDao.getAll(Product.class);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 }

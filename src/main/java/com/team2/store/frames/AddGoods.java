@@ -7,6 +7,8 @@ import com.team2.store.service.IProductService;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
+import java.util.*;
+import java.util.List;
 
 /**
  * Created by Максим on 22.02.2016.
@@ -49,42 +51,35 @@ public class AddGoods extends JFrame {
         frameWidth = (screenWidth*2)/3;
         frameHeight = (screenHeight*2)/3;
 
+
         JLabel mainLabel = new JLabel("Addition of goods");
         mainLabel.setFont(new Font("Sen-serif",Font.BOLD, 30));
-        mainLabel.setBounds(frameWidth/3,frameHeight/20,300,40);
+        mainLabel.setBounds(320,50,300,40);
         addition.add(mainLabel);
 
         JLabel addLabel = new JLabel("Name of good: ");
         addLabel.setFont(new Font("Sen-serif",Font.BOLD, 14));
-        addLabel.setBounds(200,100,140,25);
+        addLabel.setBounds(150,150,140,25);
         addition.add(addLabel);
 
         final JTextField addTextField = new JTextField();
-        addTextField.setBounds(320, 100, 200, 30);
+        addTextField.setBounds(270, 150, 200, 30);
         addition.add(addTextField);
 
         JLabel numberLabel = new JLabel("Number: ");
         numberLabel.setFont(new Font("Sen-serif",Font.BOLD, 14));
-        numberLabel.setBounds(530,100,80,25);
+        numberLabel.setBounds(480,150,80,25);
         addition.add(numberLabel);
 
         final JTextField intTextField = new JTextField();
-        intTextField.setBounds(610,100,50,30);
+        intTextField.setBounds(560,150,80,30);
         addition.add(intTextField);
 
         JButton addButton = new JButton("Add");
-        addButton.setBounds(380,160,100,30);
+        addButton.setBounds(660,150,100,30);
         addButton.addActionListener(new AbstractAction() {
             public void actionPerformed(ActionEvent e) {
                 JFrame frame = new JFrame("Success");
-
-                frame.setLayout(null);
-                frame.setLocationRelativeTo(null);
-                frame.setSize(400,200);
-                JLabel label = new JLabel("Good has been added!");
-                label.setFont(new Font("Sen-serif", Font.BOLD, 14));
-                label.setBounds(50,80,200,30);
-                frame.add(label);
                 String productName = addTextField.getText();
                 int productCount = Integer.parseInt(intTextField.getText());
                 IProductService productService = (IProductService) Constants.context.getBean("productService");
@@ -92,10 +87,54 @@ public class AddGoods extends JFrame {
                 product.setProductName(productName);
                 product.setCount(productCount);
                 productService.addNewProduct(product);
+                frame.setLayout(null);
+                frame.setLocationRelativeTo(null);
+                frame.setSize(400,200);
+                JLabel label = new JLabel("Good has been added!");
+                label.setFont(new Font("Sen-serif", Font.BOLD, 14));
+                label.setBounds(50,80,200,30);
+                frame.add(label);
+
                 frame.setVisible(true);
             }
         });
         addition.add(addButton);
+
+        JPanel panel = new JPanel();
+        panel.setLayout(new BorderLayout());
+
+        Object[] headers = { "id", "Name", "Count" };
+        IProductService productService = (IProductService) Constants.context.getBean("productService");
+        List<Product> allProducts = productService.getAll();
+        System.out.println(allProducts);
+        //Массив содержащий информацию для таблицы
+        Object[][] data = new Object[allProducts.size()][3];
+        for(int i=0;i<allProducts.size();i++){
+            data[i][0] = allProducts.get(i).getProduct_id();
+            data[i][1] = allProducts.get(i).getProductName();
+            data[i][2] = allProducts.get(i).getCount();
+        }
+
+        panel.setLayout(new GridLayout(2,0));
+
+        JLabel labelP = new JLabel();
+        panel.add(labelP);
+
+
+        JTable jTabPeople = new JTable(data, headers);
+
+        JScrollPane jscrlp = new JScrollPane(jTabPeople);
+
+        panel.setSize(frameWidth, frameHeight);
+
+        panel.add(jscrlp);
+
+        panel.setVisible(true);
+
+        addition.add(panel);
+
     }
+
+
 
 }

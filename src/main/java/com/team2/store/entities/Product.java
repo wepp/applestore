@@ -8,7 +8,12 @@ import javax.persistence.*;
 
 @Entity
 @Table(name="product")
+@NamedQueries({
+        @NamedQuery(name = Product.getAllProducts, query = "SELECT role FROM Product role")
+})
 public class Product {
+
+    public static final String getAllProducts = "getAllProducts";
 
     @Id
     @GeneratedValue

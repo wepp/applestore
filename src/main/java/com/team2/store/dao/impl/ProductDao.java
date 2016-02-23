@@ -7,6 +7,8 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 /**
  * Created by Isaiev on 22.02.2016.
  */
@@ -31,5 +33,11 @@ public class ProductDao implements IProductDao {
 
     public Product getProductById(int id) {
         return (Product) currentSession().get(Product.class, id);
+    }
+
+    public List<Product> getAll(Class<Product> tClass)  throws Exception{
+        String fullClassName = tClass.newInstance().getClass().getName();
+        fullClassName = fullClassName.substring(fullClassName.lastIndexOf(".")+1, fullClassName.length());
+        return currentSession().createQuery("from "+fullClassName).list();
     }
 }
