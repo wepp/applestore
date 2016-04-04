@@ -12,7 +12,7 @@ import java.util.List;
 /**
  * Created by Isaiev on 22.02.2016.
  */
-@Service
+@Service ("productService")
 @Transactional
 public class ProductService implements IProductService {
 
@@ -44,5 +44,9 @@ public class ProductService implements IProductService {
             e.printStackTrace();
         }
         return null;
+    }
+
+    public void setProductDao(IProductDao productDao) {
+        this.productDao = productDao;
     }
 }

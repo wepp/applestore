@@ -22,6 +22,9 @@ public class Product {
     @Column(name="productName")
     private String productName;
 
+    @Column(name="descriotion")
+    private String descriotion;
+
     @Column(name="count")
     private int count;
 
@@ -47,5 +50,13 @@ public class Product {
 
     public void setCount(int count) {
         this.count = count;
+    }
+
+    public String getDescriotion() {
+        return descriotion;
+    }
+
+    public void setDescriotion(String descriotion) {
+        this.descriotion = descriotion;
     }
 }

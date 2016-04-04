@@ -3,6 +3,7 @@ package com.team2.store.frames;
 import com.team2.store.Constants;
 import com.team2.store.entities.Product;
 import com.team2.store.service.IProductService;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import javax.swing.*;
 import java.awt.*;
@@ -59,17 +60,27 @@ public class AddGoods extends JFrame {
 
         JLabel addLabel = new JLabel("Name of good: ");
         addLabel.setFont(new Font("Sen-serif",Font.BOLD, 14));
-        addLabel.setBounds(150,150,140,25);
+        addLabel.setBounds(150,100,140,25);
         addition.add(addLabel);
 
         final JTextField addTextField = new JTextField();
-        addTextField.setBounds(270, 150, 200, 30);
+        addTextField.setBounds(270, 100, 200, 30);
         addition.add(addTextField);
+
+        JLabel descLabel = new JLabel("Description of good: ");
+        descLabel.setFont(new Font("Sen-serif",Font.BOLD, 14));
+        descLabel.setBounds(110,150,160,25);
+        addition.add(descLabel);
+
+        final JTextArea descTextField = new JTextArea();
+        descTextField.setBounds(270, 150, 200, 100);
+        addition.add(descTextField);
 
         JLabel numberLabel = new JLabel("Number: ");
         numberLabel.setFont(new Font("Sen-serif",Font.BOLD, 14));
         numberLabel.setBounds(480,150,80,25);
         addition.add(numberLabel);
+
 
         final JTextField intTextField = new JTextField();
         intTextField.setBounds(560,150,80,30);
@@ -81,10 +92,12 @@ public class AddGoods extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 JFrame frame = new JFrame("Success");
                 String productName = addTextField.getText();
+                String productDesc = descTextField.getText();
                 int productCount = Integer.parseInt(intTextField.getText());
                 IProductService productService = (IProductService) Constants.context.getBean("productService");
                 Product product = new Product();
                 product.setProductName(productName);
+                product.setDescriotion(productDesc);
                 product.setCount(productCount);
                 productService.addNewProduct(product);
                 frame.setLayout(null);
@@ -103,16 +116,18 @@ public class AddGoods extends JFrame {
         JPanel panel = new JPanel();
         panel.setLayout(new BorderLayout());
 
-        Object[] headers = { "id", "Name", "Count" };
+        Object[] headers = { "id", "Name", "Description" ,"Count" };
+        Constants.context = new ClassPathXmlApplicationContext("config.xml");
         IProductService productService = (IProductService) Constants.context.getBean("productService");
         List<Product> allProducts = productService.getAll();
         System.out.println(allProducts);
-        //Массив содержащий информацию для таблицы
-        Object[][] data = new Object[allProducts.size()][3];
+//        Массив содержащий информацию для таблицы
+        Object[][] data = new Object[allProducts.size()][4];
         for(int i=0;i<allProducts.size();i++){
             data[i][0] = allProducts.get(i).getProduct_id();
             data[i][1] = allProducts.get(i).getProductName();
-            data[i][2] = allProducts.get(i).getCount();
+            data[i][2] = allProducts.get(i).getDescriotion();
+            data[i][3] = allProducts.get(i).getCount();
         }
 
         panel.setLayout(new GridLayout(2,0));

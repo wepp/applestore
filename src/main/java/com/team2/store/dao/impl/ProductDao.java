@@ -40,4 +40,8 @@ public class ProductDao implements IProductDao {
         fullClassName = fullClassName.substring(fullClassName.lastIndexOf(".")+1, fullClassName.length());
         return currentSession().createQuery("from "+fullClassName).list();
     }
+
+    public void setSessionFactory(SessionFactory sessionFactory) {
+        this.sessionFactory = sessionFactory;
+    }
 }
