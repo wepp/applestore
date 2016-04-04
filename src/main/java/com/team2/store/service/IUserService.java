@@ -7,4 +7,6 @@ import com.team2.store.entities.User;
  */
 public interface IUserService {
     void addUser(User user);
+    User login(String login, String password);
+
 }

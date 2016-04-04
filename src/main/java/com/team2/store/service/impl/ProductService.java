@@ -45,8 +45,4 @@ public class ProductService implements IProductService {
         }
         return null;
     }
-
-    public void setProductDao(IProductDao productDao) {
-        this.productDao = productDao;
-    }
 }

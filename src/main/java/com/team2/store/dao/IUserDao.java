@@ -7,4 +7,7 @@ import com.team2.store.entities.User;
  */
 public interface IUserDao {
     void addUser(User user);
+    User getUserByLogin(String login);
+    void update(User user);
+    public void delete(User user);
 }

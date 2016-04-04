@@ -2,7 +2,9 @@ package com.team2.store.frames;
 
 import com.team2.store.Constants;
 import com.team2.store.entities.Product;
+import com.team2.store.entities.User;
 import com.team2.store.service.IProductService;
+import com.team2.store.service.IUserService;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import javax.swing.*;
@@ -119,9 +121,11 @@ public class AddGoods extends JFrame {
         Object[] headers = { "id", "Name", "Description" ,"Count" };
         Constants.context = new ClassPathXmlApplicationContext("config.xml");
         IProductService productService = (IProductService) Constants.context.getBean("productService");
+        IUserService userService = (IUserService) Constants.context.getBean("userService");
+        User user = userService.login("admin","admin");
+        System.out.println(user.getLogin());
         List<Product> allProducts = productService.getAll();
         System.out.println(allProducts);
-//        Массив содержащий информацию для таблицы
         Object[][] data = new Object[allProducts.size()][4];
         for(int i=0;i<allProducts.size();i++){
             data[i][0] = allProducts.get(i).getProduct_id();
