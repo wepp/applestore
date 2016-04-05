@@ -41,6 +41,11 @@ public class ProductDao implements IProductDao {
         return currentSession().createQuery("from "+fullClassName).list();
     }
 
+    @Override
+    public void delete(Product product) {
+        currentSession().delete(product);
+    }
+
     public void setSessionFactory(SessionFactory sessionFactory) {
         this.sessionFactory = sessionFactory;
     }

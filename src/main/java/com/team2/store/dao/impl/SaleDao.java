@@ -40,7 +40,7 @@ public class SaleDao implements ISaleDao {
         return (Sale) currentSession().get(Sale.class, id);
     }
 
-    public List<Sale> getAll(Class<Sale> tClass) throws Exception{
+    public List<Sale> getAll(Class<Sale> tClass) throws Exception {
         String fullClassName = tClass.newInstance().getClass().getName();
         fullClassName = fullClassName.substring(fullClassName.lastIndexOf(".")+1, fullClassName.length());
         return currentSession().createQuery("from "+fullClassName).list();

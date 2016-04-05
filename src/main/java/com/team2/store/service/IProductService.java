@@ -13,4 +13,6 @@ public interface IProductService {
     void removeOneProduct(Product product);
     void addNewProduct(Product product);
     List<Product> getAll();
+    void delete(Product product);
+    void update(Product product);
 }

@@ -12,7 +12,7 @@ public interface ISaleDao {
 
     void addSale(Sale sale);
     void update(Sale sale);
-    public void delete(Sale sale);
+    void delete(Sale sale);
     Sale getSaleById(int id);
     List<Sale> getAll(Class<Sale> tClass) throws Exception;
 }

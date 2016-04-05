@@ -45,4 +45,14 @@ public class ProductService implements IProductService {
         }
         return null;
     }
+
+    @Override
+    public void delete(Product product) {
+        productDao.delete(product);
+    }
+
+    @Override
+    public void update(Product product) {
+        productDao.update(product);
+    }
 }

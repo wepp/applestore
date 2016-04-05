@@ -47,4 +47,16 @@ public class UserDao implements IUserDao {
     public void delete(User user) {
         currentSession().delete(user);
     }
+
+    @Override
+    public List<User> getAll(Class<User> tClass) throws Exception {
+        String fullClassName = tClass.newInstance().getClass().getName();
+        fullClassName = fullClassName.substring(fullClassName.lastIndexOf(".")+1, fullClassName.length());
+        return currentSession().createQuery("from "+fullClassName).list();
+    }
+
+    @Override
+    public User getUserById(int id) {
+        return (User) currentSession().get(User.class, id);
+    }
 }

@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 /**
  * Created by Isaiev on 22.02.2016.
  */
@@ -37,5 +39,15 @@ public class UserService implements IUserService {
         if(user.getPassword().equals(password))
             return user;
         return null;
+    }
+
+    @Override
+    public User getUserById(int id) {
+        return userDao.getUserById(id);
+    }
+
+    @Override
+    public List<User> getAll() throws Exception {
+        return userDao.getAll(User.class);
     }
 }
